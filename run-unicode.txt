@@ -1,0 +1,13 @@
+     LDA text
+run  ADD one
+     OUT
+     WRT 0
+     STA text
+     LDA nln
+     WRT 0
+     LDA text
+     BRA run
+     HLT
+text DAT 0
+one  DAT 1
+nln  DAT 10

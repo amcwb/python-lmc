@@ -1,0 +1,5 @@
+RUN LDA
+    INP
+    WRT 0
+    BRP RUN
+    HLT
