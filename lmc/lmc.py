@@ -1,39 +1,19 @@
-# Copyright (C) 2021 Avery
-# 
-# This file is part of python-lmc.
-# 
-# python-lmc is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-# 
-# python-lmc is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-# 
-# You should have received a copy of the GNU General Public License
-# along with python-lmc.  If not, see <http://www.gnu.org/licenses/>.
-
-import struct
 from collections import namedtuple
-from typing import Callable, Dict, Optional
-
-instruction = namedtuple("instruction", ["opcode", "operand"])
+from typing import Callable
 
 class Runtime:
     _default_opcodes = [
-        ('HLT', 0,  '_HLT'),
-        ('ADD', 1,  '_ADD'),
-        ('SUB', 2,  '_SUB'),
-        ('STA', 3,  '_STA'),
-        ('DAT', 4,  '_DAT'),
-        ('LDA', 5,  '_LDA'),
-        ('BRA', 6,  '_BRA'),
-        ('BRZ', 7,  '_BRZ'),
-        ('BRP', 8,  '_BRP'),
-        ('OUT', 9,  '_OUT'),
-        ('INP', 10, '_INP'),
+        ("HLT", 0,  "_HLT"),
+        ("ADD", 1,  "_ADD"),
+        ("SUB", 2,  "_SUB"),
+        ("STA", 3,  "_STA"),
+        ("DAT", 4,  "_DAT"),
+        ("LDA", 5,  "_LDA"),
+        ("BRA", 6,  "_BRA"),
+        ("BRZ", 7,  "_BRZ"),
+        ("BRP", 8,  "_BRP"),
+        ("OUT", 9,  "_OUT"),
+        ("INP", 10, "_INP"),
     ]
 
     def _HLT(self, arg0):
@@ -76,7 +56,7 @@ class Runtime:
                 pass
 
     def _OUT(self, arg0):
-        print(chr(self.acc), end='')
+        print(chr(self.acc), end="")
 
     def __init__(self, memory_size: int, /, operand_bits: int = None, opcode_bits = 4, register_default: bool = True) -> None:
         self.acc = 0
@@ -121,7 +101,7 @@ class Runtime:
         first_run = []
         for line in lines:
             line = line.strip()
-            data = [part for part in line.split() if part != '']
+            data = [part for part in line.split() if part != ""]
             if len(data) == 1:
                 first_run.append([None, self.get_opcode(data[0]), None, mem_index])
                 mem_index += 1
@@ -214,4 +194,4 @@ class ExampleWriteDevice:
         self.file = open(path, "wb+")
     
     def write(self, value: int):
-        self.file.write(chr(value).encode('utf-8'))
+        self.file.write(chr(value).encode("utf-8"))
